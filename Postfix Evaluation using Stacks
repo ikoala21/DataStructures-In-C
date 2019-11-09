@@ -1,0 +1,64 @@
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+#define SIZE 10
+void push(int);
+int pop();
+int stack[SIZE],top=-1;
+char string[SIZE];
+int main()
+{
+    int i=0,c,d;
+    printf("Enter the postfix Expression: ");
+    gets(string);
+    while(string[i]!='\0')
+    {
+        if(string[i]>=48 && string[i]<=57)
+        {
+            string[i]=string[i]-48;
+            push(string[i]);
+        }
+        else
+        {
+            c=pop();
+            d=pop();
+            switch(string[i])
+            {
+                case '+': push(c+d);
+                          break;
+                case '-': push(c-d);
+                          break;
+                case '*': push(c*d);
+                          break;
+                case '/': push(c/d);
+                          break;  
+                case '^': push(c^d);
+                          break;
+            }
+        }
+        i++;
+    }
+    printf("The value of postfix expression is: %d ",stack[top]);
+}
+void push(int k)
+{
+    if(top==SIZE-1)
+        printf("stack overflow");
+    else
+    {
+        top++;
+        stack[top]=k;
+    }
+}
+int pop()
+{
+    if(top==-1)
+        printf("stack underflow");
+    else
+    {
+        int k;
+        k=stack[top];
+        top--;
+        return k;
+    }
+}
