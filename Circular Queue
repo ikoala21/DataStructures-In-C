@@ -1,0 +1,59 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+#define SIZE 10
+void insertion();
+void deletion();
+void display();
+int rear=-1,front=0,queue[SIZE]; 
+int main()
+{
+    int choice;
+    while(1)
+    {
+        printf("Select One Option: ");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:insertion();
+                   break;
+            case 2:deletion();
+                   break;
+            case 3:display();
+                   break;
+            case 4:exit(0);
+                   break; 
+        }
+    }
+}
+void insertion()
+{
+    if(rear==SIZE-1 && front==0)
+        printf("queue is full");
+    else
+    {
+        int item;
+        printf("Enter the item");
+        scanf("%d",&item);
+        rear=(rear+1)%SIZE;
+        queue[rear]=item;
+    }
+}
+void deletion()
+{
+    if(front-1==rear)
+        printf("Queue is Empty");
+    else
+    {
+        int k;
+        k=queue[front];
+        printf("The Deleted item is %d",k);
+        front=(front+1)%SIZE;
+    }
+}
+void display()
+{
+    int i;
+    for(i=front;i<=rear;i++)
+        printf("%d ",queue[i]);
+}
