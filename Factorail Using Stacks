@@ -1,0 +1,44 @@
+#include<stdio.h>
+#define SIZE 10
+void push(int);
+int pop();
+int stack[SIZE],top=-1;
+int main()
+{
+    int i, number,c,d;
+    printf("Enter the number: ");
+    scanf("%d",&number);
+    if(number==0 || number==1)
+        return 1;
+    for(i=1;i<=number;i++)
+        push(i);
+    for(i=1;i<number;i++)
+    {
+        c=pop();
+        d=pop();
+        push(c*d);
+    }
+    printf("Value is: %d",stack[top]);
+}
+void push(int j)
+{
+    if(top==SIZE-1)
+        printf("Stack Overflow");
+    else
+    {
+        top=top+1;
+        stack[top]=j;
+    }
+}
+int pop()
+{
+    if(top==-1)
+        printf("Stack Underflow");
+    else
+    {
+        int k;
+        k=stack[top];
+        top--;
+        return k;
+    }
+}
