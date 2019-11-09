@@ -1,0 +1,21 @@
+#include<stdio.h>
+void TowerOfHanoi(int ,char ,char, char);
+int i=1;
+int main()
+{
+    int height;
+    char source='s',auxillary='a',destination='d';
+    printf("Height of the tower: ");
+    scanf("%d",&height);
+    TowerOfHanoi(height,'s','a','d');
+    return 0;
+}
+void TowerOfHanoi(int height,char source,char auxillary,char destination)
+{
+    if(height>=1)
+    {
+        TowerOfHanoi(height-1,source,destination,auxillary);
+        printf("Step %d: %c to %c\n",i++,source,destination);
+        TowerOfHanoi(height-1,auxillary,source,destination);
+    }
+}
