@@ -19,6 +19,9 @@ int main()
                    break;
             case 3:display();
                    break;
+            case 4:exit();
+                   break;
+            default: break;
         }
     }
 }
