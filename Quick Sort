@@ -1,0 +1,62 @@
+#include<stdio.h>
+#include<conio.h>
+#define SIZE 10
+void quicksort(int *a,int beg,int end);
+void partitionArray(int *a,int beg,int end,int *pivotLoc);
+int main()
+{
+    int n,a[10],i;
+    printf("enter the number of elements:");
+    scanf("%d",&n);
+    printf("the elements in the array are: ");
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    quicksort(a,0,n-1);
+    printf("\nAfter sorting: ");
+    for(i=0;i<n;i++)
+    {
+        printf("%d ",a[i]);
+    }
+}
+void quicksort(int *a,int beg,int end)
+{
+    int pivotLoc;
+    if(beg<end)
+    {
+        partitionArray(a,beg,end,&pivotLoc);
+        quicksort(a,beg,pivotLoc-1);
+        quicksort(a,pivotLoc+1,end);
+    }
+}
+void partitionArray(int *a,int beg,int end,int *pivotLoc)
+{
+   int left=beg,right=end,temp;
+   *pivotLoc=left;
+   while(1)
+   {
+        while(a[*pivotLoc]<=a[right] && *pivotLoc!=right)
+            right--;
+        if(*pivotLoc==right)
+            break;
+        else if(a[*pivotLoc]>right)
+        {
+            temp=a[right];
+            a[right]=a[*pivotLoc];
+            a[*pivotLoc]=temp;
+            *pivotLoc=right;
+        }
+        while(a[*pivotLoc]>=a[left] && *pivotLoc!=left)
+            left++;
+        if(*pivotLoc==left)
+            break;
+        else if(a[*pivotLoc]<left)
+        {
+            temp=a[left];
+            a[left]=a[*pivotLoc];
+            a[*pivotLoc]=temp;
+            *pivotLoc=left;
+        }
+    }
+}
