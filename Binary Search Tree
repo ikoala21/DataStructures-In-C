@@ -1,0 +1,111 @@
+#include<stdio.h>
+#include<math.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node* left;
+    struct node* right;
+}*root=NULL,*temp=NULL;
+void find(struct node* t1)
+{
+    if(temp->data>t1->data && t1->right==NULL)
+        t1->right=temp;
+    else if(temp->data>t1->data && t1->right!=NULL)
+        find(t1->right);
+    else if(temp->data<t1->data && t1->left==NULL)
+        t1->left=temp;
+    else if(temp->data<t1->data && t1->left==NULL)
+        find(t1->left);
+}
+void insertion()
+{
+    temp=(struct node*)malloc(sizeof(struct node));
+    printf("Enter the vlaue of node");
+    scanf("%d",&temp->data);
+    temp->left=temp->right=NULL;
+    if(root==NULL)
+        root=temp;
+    else
+        find(root);
+}
+void deletion(struct node* root,int k)
+{
+    struct node *parent,*s=NULL;
+    temp=root;
+    while(temp->data!=k && temp!=NULL)
+    {
+        parent=temp;
+        if(temp->data>k)
+            temp=temp->left;
+        else
+            temp=temp->right;
+    }
+    if(temp==NULL)
+        printf("Node not found\n");
+    else
+    {
+        if(temp->right==NULL && temp->left==NULL)
+        {
+            if(parent->data<temp->data)
+                parent->right=NULL;
+            else
+                parent->left=NULL;
+        }
+        else if(temp->right==NULL || temp->left==NULL)
+        {
+            if(parent->data<temp->data)
+            {
+                if(temp->right!=NULL)
+                    parent->right=temp->right;
+                else
+                    parent->right=temp->left;
+            }
+            else if(parent->data>temp->data)
+            {
+                if(temp->right!=NULL)
+                    parent->left=temp->right;
+                else
+                    parent->left=temp->left;
+            }
+        }
+        else if(temp->left!=NULL && temp->right!=NULL)
+        {
+            s=temp->right;
+            while(s->left!=NULL)
+                s=s->left;
+            temp->data=s->data;
+            deletion(s,s->data);
+        }
+    }
+}
+void infix(struct node* x)
+{
+    if(x->left!=NULL)
+        infix(x->left);
+    printf("%d ",x->data);
+    if(x->right!=NULL)
+        infix(x->right);
+}
+void main()
+{
+    int choice,n1;
+    while(1)
+    {
+        printf("Select one option: ");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1: insertion();
+                    break;
+            case 2: printf("Enter the node to be deleted: ");
+                    scanf("%d",&n1);
+                    deletion(root,n1);
+                    break;
+            case 3: infix(root);
+                    break;
+            case 4: exit(0);
+                    break;
+        }
+    }
+}
