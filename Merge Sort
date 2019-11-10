@@ -1,0 +1,57 @@
+#include<stdio.h>
+#include<conio.h>
+#define SIZE 10
+void mergesort(int *a,int beg,int end);
+void mergeSortArray(int *a,int lbeg,int lend,int rbeg,int rend);
+int temp[SIZE];
+int main()
+{
+    int n,a[10],i;
+    printf("enter the number of elements:");
+    scanf("%d",&n);
+    printf("the elements in the array are: ");
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    mergesort(a,0,n-1);
+    printf("\nAfter sorting: ");
+    for(i=0;i<n;i++)
+    {
+        printf("%d ",a[i]);
+    }
+}
+void mergesort(int *a,int beg,int end)
+{
+    int mid;
+    if(beg<end)
+    {
+        mid=(beg+end)/2;
+        mergesort(a,beg,mid);
+        mergesort(a,mid+1,end);
+        mergeSortArray(a,beg,mid,mid+1,end);
+    }
+}
+void mergeSortArray(int *a,int lbeg,int lend,int rbeg,int rend)
+{
+    int pa=lbeg,pb=rbeg,pt=lbeg;
+    while(pa<=lend && pb<=rend)
+    {
+        if(a[pa]<a[pb])
+            temp[pt++]=a[pa++];
+        else
+            temp[pt++]=a[pb++];
+    }
+    if(pa>lend)
+    {
+        while(pb<=rend)
+            temp[pt++]=a[pb++];
+    }
+    else
+    {
+        while(pa<=lend)
+            temp[pt++]=a[pa++];
+    }
+    for(pt=lbeg;pt<=rend;pt++)
+        a[pt]=temp[pt];
+}
