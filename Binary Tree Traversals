@@ -1,0 +1,57 @@
+#include<stdio.h>
+#include<math.h>
+#include<stdlib.h>
+void postfix(int);
+void prefix(int);
+void infix(int);
+int a[50],height;
+int main()
+{
+    int n,n1,i,key,k=0,p;
+    printf("Enter the height of the tree: ");
+    scanf("%d",&height);
+    n=pow(2,height)-1;
+    printf("Number of nodes to be inserted: ");
+    scanf("%d",&n1);
+    for(i=1;i<=n;i++)
+        a[i]=-1;
+    while(k<n1)
+    {
+        printf("Enter your position: ");
+        scanf("%d",&p);
+        printf("Enter your key: ");
+        scanf("%d",&key);
+        a[p]=key;
+        k++;
+    }
+    printf("Infix:");
+    infix(1);
+    printf("prefix:");
+    prefix(1);
+    printf("postfix:");
+    postfix(1);
+}
+void infix(int i)
+{
+    if((2*i<pow(2,height)-1) && a[2*i]!=-1)
+        infix(2*i);
+    printf("%d ",a[i]);
+    if((2*i+1<pow(2,height)-1) && a[2*i+1]!=-1)
+        infix(2*i+1);
+}
+void prefix(int i)
+{
+    printf("%d ",a[i]);
+    if((2*i<pow(2,height)-1) && a[2*i]!=-1)
+        prefix(2*i);
+    if((2*i+1<pow(2,height)-1) && a[2*i+1]!=-1)
+        prefix(2*i+1);
+}
+void postfix(int i)
+{
+    if((2*i<pow(2,height)-1) && a[2*i]!=-1)
+        postfix(2*i);
+    if((2*i+1<pow(2,height)-1) && a[2*i+1]!=-1)
+        postfix(2*i+1);
+    printf("%d ",a[i]);
+}
