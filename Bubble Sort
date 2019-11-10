@@ -1,0 +1,30 @@
+#include<stdio.h>
+#include<conio.h>
+int main()
+{
+    int n,a[10],i,j,temp,k;
+    printf("enter the number of elements:");
+    scanf("%d",&n);
+    printf("the elements in the array are: ");
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    for(k=1;k<n;k++)
+    {
+        for(j=0;j<n-k;j++)
+        {
+            if(a[j]>a[j+1])
+            {
+                temp=a[j];
+                a[j]=a[j+1];
+                a[j+1]=temp;
+            }
+        }
+    }
+    printf("\nAfter sorting: ");
+    for(i=0;i<n;i++)
+    {
+        printf("%d ",a[i]);
+    }
+}
