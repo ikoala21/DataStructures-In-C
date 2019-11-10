@@ -1,0 +1,70 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+void ordered();
+void unordered();
+int i,n,key,f=0,l=0,a[10];
+void main()
+{
+    int choice;
+    while(1)
+    {
+        printf("Enter the choice: ");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1: ordered();
+                    break;
+            case 2: unordered();
+                    break;
+            case 3: exit(0);
+                    break;
+        }
+    }
+}
+void ordered()
+{
+    printf("Numbers: ");
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        printf("enter the element: ");
+        scanf("%d",&a[i]);
+        printf("\n");
+    }
+    printf("\nEnter the key:");
+    scanf("%d",&key);
+    for(i=0;i<n && a[i]<=key;i++)
+    {
+        if(a[i]==key)
+        {
+            printf("Key found at pos: %d\n",i);
+            f++;
+        }
+    }
+    if(f==0)
+        printf("Key not found\n");
+}
+void unordered()
+{
+    printf("Numbers: ");
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        printf("enter the element: ");
+        scanf("%d",&a[i]);
+        printf("\n");
+    }
+    printf("Enter the key:");
+    scanf("%d",&key);
+    for(i=0;i<n;i++)
+    {
+        if(a[i]==key)
+        {
+            printf("Key found at pos: %d\n",i);
+            l++;
+        }
+    }
+    if(l==0)
+        printf("Key not found\n");
+}
